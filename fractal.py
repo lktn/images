@@ -1,8 +1,30 @@
 from manim import *
 import random
-
 config.pixel_height = 1920
 config.pixel_width = 1080
+class Mandelbrot(Scene):
+    def construct(self):
+        def mandelbrot(c, max_iter):
+            z = 0
+            n = 0
+            while abs(z) <= 2 and n < max_iter:
+                z = z**2 + c
+                n += 1
+            return n
+
+        def check_point(x, y, max_iter=100):
+            c = complex(x, y)
+            return mandelbrot(c, max_iter)
+
+        v = VGroup()
+        for _ in range(1, 1000000):
+            x = random.uniform(-2, 1)
+            y = random.uniform(-1.5, 1.5)
+            if check_point(x, y) == 100:
+                v.add(Dot([x, y, 0]).scale(0.02))
+                
+        self.add(v.scale(3))
+
 class Tetrahedral(ThreeDScene):
     def construct(self):
         a = [0, 0, 9]
