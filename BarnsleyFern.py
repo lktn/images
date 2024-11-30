@@ -6,8 +6,8 @@ config.pixel_width = 1620
 class BarnsleyFern(Scene):
     def construct(self):
         x, y = 0, 0
-        v = VGroup()
-        for _ in range(100000):
+        v = []
+        for _ in range(500000):
             r = random.random()
             if r < 0.01:
                 a = +0
@@ -22,7 +22,7 @@ class BarnsleyFern(Scene):
                 a = -0.15*x + 0.28*y
                 b = +0.26*x + 0.24*y + 0.44
 
-            v.add(Dot(point=[a, b, 0], radius=0.005, color=PINK))
             x, y = a, b
+            v.append([a, b])
 
-        self.add(v.move_to(DOWN/2).scale(2))
+        self.add(VGroup(*[Dot(point=[x, y, 0], radius=0.004, color=GREEN) for x, y in v]).scale(2).move_to(DOWN/2))
