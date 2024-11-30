@@ -4,26 +4,37 @@ config.pixel_height = 1920
 config.pixel_width = 1080
 class Mandelbrot(Scene):
     def construct(self):
-        def mandelbrot(c, max_iter):
-            z = 0
-            n = 0
-            while abs(z) <= 2 and n < max_iter:
-                z = z**2 + c
-                n += 1
-            return n
+        d = 2
+        n = 2300
 
-        def check_point(x, y, max_iter=100):
+        m = 4/n
+        a = (d-1)*d**(d/(1-d))
+        def f(x, y, d, a):
             c = complex(x, y)
-            return mandelbrot(c, max_iter)
+            z = c
+            if abs(z) > 2:
+                return False
+            elif abs(z) <= a:
+                return True
+            for i in range(1, 100):
+                z = z**d + c
+                if abs(z) > 2:
+                    return False
+            return True
 
         v = VGroup()
-        for _ in range(1, 1000000):
-            x = random.uniform(-2, 1)
-            y = random.uniform(-1.5, 1.5)
-            if check_point(x, y) == 100:
-                v.add(Dot([x, y, 0]).scale(0.02))
-                
-        self.add(v.scale(3))
+        g = []
+        for i in range(0, n+1):
+            for j in range(0, n+1):
+                x = i*m-2
+                y = j*m-2
+                if f(x, y, d, a):
+                    g.append([x, y])
+                    
+        self.add(
+            VGroup(*[Dot(point=[x, y, 0], radius=0.0015) for x, y in g]).scale(3.5), 
+            MathTex(f"Area \\approx {16*len(v)/(n**2):.6f}", color=GREEN)
+            )
 
 class Tetrahedral(ThreeDScene):
     def construct(self):
