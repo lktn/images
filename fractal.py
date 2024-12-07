@@ -92,28 +92,19 @@ class Cube(Scene):
 
 class Hexagon(Scene):
     def construct(self):
-        r = RegularPolygon(n=6, color=WHITE).scale(6)
-        self.add(r)
-
+        r = RegularPolygon(n=6, color=WHITE, stroke_width=0.5).scale(7)
         p1, p2, p3, p4, p5, p6 = r.get_vertices()
 
-        a1 = [p1, p2]
-        a2 = [p2, p3]
-        a3 = [p3, p4]
-        a4 = [p4, p5]
-        a5 = [p5, p6]
-        a6 = [p1, p6]
-        v = [a1, a2, a3, a4, a5, a6]
+        g = []
 
-        dot = Dot(point=r.get_center(), color=WHITE).scale(0.05)
-        nhom = VGroup()
-        for i in range(10000):
-            n = random.choice(v)
-            n1 = Dot(point=(n[0] + n[1] + dot.get_center())/3, color=WHITE).scale(0.1)
-            dot.become(n1)
-            nhom.add(n1)
+        d = [0, 0]
+        for i in range(1000000):
+            n = random.choice([[p1,p2], [p2,p3], [p3,p4], [p4,p5], [p5,p6], [p6,p1]])
+            a = [(d[0]+n[0][0]+n[1][0])/3, (d[1]+n[0][1]+n[1][1])/3]
+            g.append(a)
+            d = a
 
-        self.play(Create(nhom), run_time=10)
+        self.add(VGroup(*[Dot(point=[x, y, 0], radius=0.002) for x, y in g]))
 
 class Square(Scene):
     def construct(self):
