@@ -1,5 +1,4 @@
 from manim import *
-import random
 config.pixel_height = 2880*2
 config.pixel_width = 2880*2
 class MultibrotSet(Scene):
