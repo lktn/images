@@ -17,7 +17,7 @@ class MultibrotSet(Scene):
                 return False
             elif s < a:
                 return True
-            for i in range(1, 100):
+            for _ in range(1, 100):
                 z = z**d + c
                 if abs(z) > 2:
                     return False
