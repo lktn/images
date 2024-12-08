@@ -24,8 +24,8 @@ class MultibrotSet(Scene):
             return True
 
         g = []
-        for i in range(0, n+1):
-            for j in range(0, n+1):
+        for i in range(n+1):
+            for j in range(n+1):
                 x = i*m-b
                 y = j*m-b
                 if f(x, y, d, a, b):
