@@ -31,7 +31,6 @@ class MultibrotSet(Scene):
                 if f(x, y, d, a, b):
                     g.append([x, y])
                     
-        self.add(
-            VGroup(*[Dot(point=[x, y, 0], radius=0.002) for x, y in g], Circle(radius=b)).scale(3.5), 
-            MathTex(f"Area \\approx {16*len(g)/(n**2):.6f}", color=GREEN),
-            )
+        self.add(VGroup(*[Dot(point=[x, y, 0], radius=0.002) for x, y in g], 
+                Circle(radius=b, stroke_width=0.5, color=WHITE)).scale(3.5),
+                MathTex(f"Area\\approx{4*b**2*len(g)/n**2:.10f}").move_to(-6*UP))
