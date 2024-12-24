@@ -11,12 +11,11 @@ class MultibrotSet(Scene):
         m = 2*b/n
         def f(x, y, d, a, b):
             c = complex(x, y)
-            z = c
-            s = abs(z)
-            if s > b:
+            if abs(c) > b:
                 return False
-            elif s < a:
+            elif abs(c) < a:
                 return True
+            z = c
             for _ in range(100):
                 z = z**d + c
                 if abs(z) > 2:
