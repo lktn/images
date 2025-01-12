@@ -2,40 +2,6 @@ from manim import *
 import random
 config.pixel_height = 1920
 config.pixel_width = 1080
-class Mandelbrot(Scene):
-    def construct(self):
-        d = 2
-        n = 2300
-
-        m = 4/n
-        a = (d-1)*d**(d/(1-d))
-        def f(x, y, d, a):
-            c = complex(x, y)
-            z = c
-            if abs(z) > 2:
-                return False
-            elif abs(z) <= a:
-                return True
-            for i in range(1, 100):
-                z = z**d + c
-                if abs(z) > 2:
-                    return False
-            return True
-
-        v = VGroup()
-        g = []
-        for i in range(0, n+1):
-            for j in range(0, n+1):
-                x = i*m-2
-                y = j*m-2
-                if f(x, y, d, a):
-                    g.append([x, y])
-                    
-        self.add(
-            VGroup(*[Dot(point=[x, y, 0], radius=0.0015) for x, y in g]).scale(3.5), 
-            MathTex(f"Area \\approx {16*len(v)/(n**2):.6f}", color=GREEN)
-            )
-
 class Tetrahedral(ThreeDScene):
     def construct(self):
         a = [0, 0, 9]
