@@ -17,6 +17,6 @@ class PythagorasTree(Scene):
             s2.rotate(3*PI/4, about_point=z[(i+1) % 4])
             return VGroup(s1, s2, pythagoras_tree(s1, n-1, i+1), pythagoras_tree(s2, n-1, i-1))
 
-        s = Square(fill_color=GREEN, side_length=1.5, fill_opacity=1, stroke_width=0).move_to(-2*UP)
+        s = Square(side_length=1.5, fill_opacity=1, stroke_width=0).move_to(-2*UP)
 
         self.add(text, VGroup(s, pythagoras_tree(s, 10, 0)).set_color_by_gradient(PINK, BLUE))
