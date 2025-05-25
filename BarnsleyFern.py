@@ -7,7 +7,7 @@ class BarnsleyFern(Scene):
     def construct(self):
         x, y = 0, 0
         v = []
-        for _ in range(500000):
+        for _ in range(100000):
             r = random.random()
             if r < 0.01:
                 x = +0
@@ -24,4 +24,4 @@ class BarnsleyFern(Scene):
 
             v.append([x, y])
 
-        self.add(VGroup(*[Dot(point=[x, y, 0], radius=0.004, color=GREEN) for x, y in v]).scale(2).move_to(DOWN/2))
+        self.add(VGroup(*[Dot(point=[x, y, 0], radius=0.005, color=GREEN) for x, y in v]).scale(2).move_to(DOWN/2))
